@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 )
 
 func main() {
@@ -16,40 +15,14 @@ func main() {
 
   strategyGuide := bufio.NewScanner(input)
 
-  totalScore := 0
+  var score int
+	scores := map[string]int{"B X": 1, "C Y": 2, "A Z": 3, "A X": 4,"B Y": 5,"C Z": 6, "C X": 7, "A Y": 8, "B Z": 9}
 
   for strategyGuide.Scan() {
     strategy := strategyGuide.Text()
-
-    if strategy == "" {
-      break
-    }
-
-    opponentChoice, myChoice := strings.Split(strategy, " ")[0], strings.Split(strategy, " ")[1]
-
-    switch {
-    case opponentChoice == "A" && myChoice == "X":
-      totalScore += 4
-    case opponentChoice == "A" && myChoice == "Y":
-      totalScore += 8
-    case opponentChoice == "A" && myChoice == "Z":
-      totalScore += 3
-    case opponentChoice == "B" && myChoice == "X":
-      totalScore += 1
-    case opponentChoice == "B" && myChoice == "Y":
-      totalScore += 5
-    case opponentChoice == "B" && myChoice == "Z":
-      totalScore += 9
-    case opponentChoice == "C" && myChoice == "X":
-      totalScore += 7
-    case opponentChoice == "C" && myChoice == "Y":
-      totalScore += 2
-    case opponentChoice == "C" && myChoice == "Z":
-      totalScore += 6
-    }
-
+    score += scores[strategy]
   }
 
-  fmt.Println(totalScore)
+  fmt.Println(score)
 
 }
